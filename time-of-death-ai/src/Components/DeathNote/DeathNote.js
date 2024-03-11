@@ -11,16 +11,37 @@ function DeathNote() {
   // Function to handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Process form submission here, such as sending data to an API
-    // You can access input values via state variables (gender, country, occupation, birthYear)
-    console.log(
-      "Form submitted with values:",
-      gender,
-      country,
-      occupation,
-      birthYear
+    // Generate a random year of death (between 70 and 100 years from birth year)
+    const randomDeathYear =
+      Number(birthYear) + Math.floor(Math.random() * 30) + 70;
+    // Generate a random cause of death
+    const causes = [
+      "heart attack",
+      "car accident",
+      "stroke",
+      "cancer",
+      "drowning",
+      "fall",
+    ];
+    const randomCauseOfDeath =
+      causes[Math.floor(Math.random() * causes.length)];
+    // Display alert with random year of death and cause of death
+    alert(
+      `You will die in the year ${randomDeathYear} by ${randomCauseOfDeath}`
     );
   };
+
+  // Random lists for country and occupation
+  const countries = ["USA", "UK", "Canada", "Australia", "Germany", "France"];
+  const occupations = [
+    "Doctor",
+    "Engineer",
+    "Teacher",
+    "Artist",
+    "Writer",
+    "Programmer",
+    "Other",
+  ];
 
   // Generate an array of years from 1900 to the current year
   const years = [];
@@ -53,7 +74,11 @@ function DeathNote() {
                 onChange={(e) => setCountry(e.target.value)}
               >
                 <option value="">Select Country</option>
-                {/* Add options for countries */}
+                {countries.map((country) => (
+                  <option key={country} value={country}>
+                    {country}
+                  </option>
+                ))}
               </select>
             </li>
             <li>
@@ -63,9 +88,11 @@ function DeathNote() {
                 onChange={(e) => setOccupation(e.target.value)}
               >
                 <option value="">Select Occupation</option>
-                <option value="doctor">Doctor</option>
-                <option value="engineer">Engineer</option>
-                {/* Add more options for occupations */}
+                {occupations.map((occupation) => (
+                  <option key={occupation} value={occupation}>
+                    {occupation}
+                  </option>
+                ))}
               </select>
             </li>
             <li>
